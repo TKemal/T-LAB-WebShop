@@ -77,6 +77,19 @@ const products = [
     rating: 4,
     numReviews: 12,
   },
+  {
+    _id: '7',
+    name: 'FKS Kviz Android App',
+    image: '/images/fkskviz.png',
+    description:
+      'Provjerite svoje znanje ili voljenjom klubu.Kviz znanja ili fudbalski klub Sarajevo podeljen je u tri kategorije: Igrači, Utakmice i Istorija i na tri "levela" težine pitanja (lako, srednje, teško). Odogovarate klikom na jedan od tri ponuđena odgovora. Tačan odgovor donosi jedan poen. Na početnom ekranu možete vidjeti Highscore prije svakog ponovnog pokretanja kviza.',
+    brand: 'T-LAB BiH',
+    category: 'Games',
+    price: 10.99,
+    countInStock: 5,
+    rating: 5,
+    numReviews: 17,
+  },
 ]
 
-export default products
+module.exports = products

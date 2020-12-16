@@ -1,0 +1,22 @@
+{
+  "name": "webshop",
+  "version": "1.0.0",
+  "description": "T-LAB BiH Web Shop app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backand/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TKemal/WebShop.git"
+  },
+  "author": "Kemal Tihic",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TKemal/WebShop/issues"
+  },
+  "homepage": "https://github.com/TKemal/WebShop#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
