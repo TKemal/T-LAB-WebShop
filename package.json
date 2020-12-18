@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "T-LAB BiH Web Shop app",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node backand/server",
     "server": "nodemon backand/server",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/TKemal/WebShop#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
