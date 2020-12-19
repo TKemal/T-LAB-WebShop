@@ -5,7 +5,7 @@ import Product from '../models/productModel.js'
 
 //@Desc Fetch all products
 //@Route GET /api/products
-//@access public
+//@access Public
 router.get(
   '/',
   asyncHandler(async (req, res) => {
@@ -15,6 +15,9 @@ router.get(
   })
 )
 
+//@fesc Fetch single product
+//@route GET /api/products/:id
+//@access Public
 router.get(
   '/:id',
   asyncHandler(async (req, res) => {
@@ -22,7 +25,8 @@ router.get(
     if (product) {
       res.json(product)
     } else {
-      res.status(404).json({ message: 'Product not found!' })
+      res.status(404)
+      throw new Error('Product not found!')
     }
   })
 )
