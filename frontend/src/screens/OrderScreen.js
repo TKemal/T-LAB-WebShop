@@ -23,11 +23,12 @@ const OrderScreen = ({ match }) => {
   const { loading: loadingPay, success: successPay } = orderPay
 
   if (!loading) {
-    const addDecimal = (num) => {
+    //   Calculate prices
+    const addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2)
     }
-    //Calculate prices
-    order.itemsPrice = addDecimal(
+
+    order.itemsPrice = addDecimals(
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     )
   }
