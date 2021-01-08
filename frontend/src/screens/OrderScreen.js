@@ -62,10 +62,10 @@ const OrderScreen = ({ match, history }) => {
       }
       document.body.appendChild(script)
     }
-    if (!order || successPay || successDeliver) {
+
+    if (!order || successPay || successDeliver || order._id !== orderId) {
       dispatch({ type: ORDER_PAY_RESET })
       dispatch({ type: ORDER_DELIVER_RESET })
-
       dispatch(getOrderDetails(orderId))
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -74,7 +74,7 @@ const OrderScreen = ({ match, history }) => {
         setSdkReady(true)
       }
     }
-  }, [dispatch, orderId, successPay, order, successDeliver, history, userInfo])
+  }, [dispatch, orderId, successPay, successDeliver, order, history, userInfo])
 
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult)
@@ -83,7 +83,6 @@ const OrderScreen = ({ match, history }) => {
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order))
-    history.push('/admin/orderlist')
   }
 
   return loading ? (
@@ -92,23 +91,24 @@ const OrderScreen = ({ match, history }) => {
     <Message variant='danger'>{error}</Message>
   ) : (
     <>
-      <h1>Order: #{order._id}</h1>
+      <h1>Order {order._id}</h1>
       <Row>
         <Col md={8}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>Shipping</h2>
-              <strong>To: </strong>
-              {order.user.name}{' '}
               <p>
-                <strong>Email: </strong>
+                <strong>Name: </strong> {order.user.name}
+              </p>
+              <p>
+                <strong>Email: </strong>{' '}
                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
               </p>
-              <strong>Address:</strong>
               <p>
-                {order.shippingAddress.address},{' '}
-                {order.shippingAddress.postalCode}, {order.shippingAddress.city}
-                , {order.shippingAddress.country}
+                <strong>Address:</strong>
+                {order.shippingAddress.address}, {order.shippingAddress.city}{' '}
+                {order.shippingAddress.postalCode},{' '}
+                {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
                 <Message variant='success'>
@@ -120,7 +120,7 @@ const OrderScreen = ({ match, history }) => {
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h2>Payment Method </h2>
+              <h2>Payment Method</h2>
               <p>
                 <strong>Method: </strong>
                 {order.paymentMethod}
@@ -134,8 +134,8 @@ const OrderScreen = ({ match, history }) => {
 
             <ListGroup.Item>
               <h2>Order Items</h2>
-              {order.orderItems.lenght === 0 ? (
-                <Message>Your order is empty</Message>
+              {order.orderItems.length === 0 ? (
+                <Message>Order is empty</Message>
               ) : (
                 <ListGroup variant='flush'>
                   {order.orderItems.map((item, index) => (
@@ -155,7 +155,7 @@ const OrderScreen = ({ match, history }) => {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x €{item.price} = €{item.qty * item.price}
+                          {item.qty} x ${item.price} = ${item.qty * item.price}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -171,28 +171,28 @@ const OrderScreen = ({ match, history }) => {
               <ListGroup.Item>
                 <h2>Order Summary</h2>
               </ListGroup.Item>
-              <ListGroup.Item disabled>
+              <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>€{order.itemsPrice}</Col>
+                  <Col>${order.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
-              <ListGroup.Item disabled>
+              <ListGroup.Item>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>€{order.shippingPrice.toFixed(2)}</Col>
+                  <Col>${order.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
-              <ListGroup.Item disabled>
+              <ListGroup.Item>
                 <Row>
                   <Col>Tax</Col>
-                  <Col>€{order.taxPrice.toFixed(2)}</Col>
+                  <Col>${order.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
-              <ListGroup.Item variant='dark'>
+              <ListGroup.Item>
                 <Row>
-                  <Col>TOTAL :</Col>
-                  <Col>€{order.totalPrice}</Col>
+                  <Col>Total</Col>
+                  <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
               {!order.isPaid && (
@@ -219,7 +219,7 @@ const OrderScreen = ({ match, history }) => {
                       className='btn btn-block'
                       onClick={deliverHandler}
                     >
-                      Mark as Delivered
+                      Mark As Delivered
                     </Button>
                   </ListGroup.Item>
                 )}

@@ -49,7 +49,7 @@ const CartScreen = ({ match, location, history }) => {
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </Col>
                   <Col md={0.5}>€{item.price}</Col>
-                  <Col md={0.5}>BAM{(item.price * 2).toFixed(0)}</Col>
+
                   <Col md={2}>
                     <Form.Control
                       size='small'
@@ -95,10 +95,6 @@ const CartScreen = ({ match, location, history }) => {
               {cartItems
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)}
-              / BAM{' '}
-              {cartItems
-                .reduce((acc, item) => acc + item.qty * (item.price * 2), 0)
-                .toFixed(0)}
             </ListGroup.Item>
             <ListGroup.Item>
               <Button
