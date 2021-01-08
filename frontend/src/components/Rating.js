@@ -1,7 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-export const Rating = ({ value, text, color }) => {
+const Rating = ({ value, text, color }) => {
   return (
     <div className='rating'>
       <span>
@@ -12,7 +11,7 @@ export const Rating = ({ value, text, color }) => {
               ? 'fas fa-star'
               : value >= 0.5
               ? 'fas fa-star-half-alt'
-              : 'fas fa-star'
+              : 'far fa-star'
           }
         ></i>
       </span>
@@ -24,7 +23,7 @@ export const Rating = ({ value, text, color }) => {
               ? 'fas fa-star'
               : value >= 1.5
               ? 'fas fa-star-half-alt'
-              : 'fas fa-star'
+              : 'far fa-star'
           }
         ></i>
       </span>
@@ -36,7 +35,7 @@ export const Rating = ({ value, text, color }) => {
               ? 'fas fa-star'
               : value >= 2.5
               ? 'fas fa-star-half-alt'
-              : 'fas fa-star'
+              : 'far fa-star'
           }
         ></i>
       </span>
@@ -48,7 +47,7 @@ export const Rating = ({ value, text, color }) => {
               ? 'fas fa-star'
               : value >= 3.5
               ? 'fas fa-star-half-alt'
-              : 'fas fa-star'
+              : 'far fa-star'
           }
         ></i>
       </span>
@@ -64,19 +63,13 @@ export const Rating = ({ value, text, color }) => {
           }
         ></i>
       </span>
-
       <span>{text && text}</span>
     </div>
   )
 }
+
 Rating.defaultProps = {
   color: '#800000',
-}
-
-Rating.propTypes = {
-  value: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
-  color: PropTypes.string,
 }
 
 export default Rating
