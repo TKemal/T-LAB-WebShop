@@ -68,6 +68,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
+
     const { data } = await axios.get(`/api/orders/${id}`, config)
 
     dispatch({
@@ -75,12 +76,15 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       payload: data,
     })
   } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+    }
     dispatch({
       type: ORDER_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: message,
     })
   }
 }
@@ -176,6 +180,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
+
     const { data } = await axios.get(`/api/orders/myorders`, config)
 
     dispatch({
@@ -183,12 +188,13 @@ export const listMyOrders = () => async (dispatch, getState) => {
       payload: data,
     })
   } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
     dispatch({
       type: ORDER_LIST_MY_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: message,
     })
   }
 }
