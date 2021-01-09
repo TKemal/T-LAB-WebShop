@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,6 +26,9 @@ const OrderListScreen = ({ history }) => {
 
   return (
     <>
+      <Link to='/admin/orderlist' className='btn btn-dark my-3'>
+        Go Back
+      </Link>
       <h1>Orders</h1>
       {loading ? (
         <Loader />
