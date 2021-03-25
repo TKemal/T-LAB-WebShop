@@ -2,7 +2,7 @@
 
 <h1>eCommerce Platform </h1><br>
 
-<a href="https://tlabwebshop.herokuapp.com/">Test Live</a> 
+<a href="https://tlabwebshop.herokuapp.com/">LIVE PREVIEW</a> 
 
 
 <h2>Features:</h2> <br>
